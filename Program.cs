@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 
 namespace HW_3
@@ -7,6 +8,7 @@ namespace HW_3
     {
         static void Main(string[] args)
         {
+            string userName_1, userName_2;
             // Бесконечный цикл, условие выхода gameMode = 5
             do
             {
@@ -39,7 +41,7 @@ namespace HW_3
                 }
                 while (!(correctParse && (gameMode > 0 && gameMode < 6))) ;
                 #endregion
-
+                
                 switch (gameMode)
                 {
                     case 1:
@@ -47,7 +49,6 @@ namespace HW_3
                         #region Первый вариант игры
                         int gameNumber = randomNumber.Next(12, 121);            //определение случайной переменной randomNumber
                         // ввод данных пользователей 
-                        string userName_1, userName_2;
                         Console.Clear();
                         Console.WriteLine("Для начала игры нужно представится, чтобы продолжить - нажмите любую клавишу. . .");
                         Console.ReadKey();
@@ -157,7 +158,6 @@ namespace HW_3
 
                         #region Второй вариант игры
 
-                        string userName_3, userName_4;
                         int numberPlayer, minNumber, maxNumber;
                         Console.Clear();
                         Console.WriteLine("Выберите количество играков от 2х до 4х");
@@ -168,7 +168,7 @@ namespace HW_3
                             if (numberPlayer <= 1 || numberPlayer >= 5) Console.WriteLine("Не верный ввод, повторите");
                         }
                         while (!(correctParse && (numberPlayer > 1 && numberPlayer < 5)));
-
+                        string[] userName = new string[numberPlayer];
                         Console.Clear();
                         Console.WriteLine("Введите дипазон чисел для случайного определения числа");
                         Console.WriteLine("Введите МИНимальный предел");
@@ -198,145 +198,57 @@ namespace HW_3
                         {
                             Console.Clear();
                             Console.Write($"Игрок №{i + 1} введите свое имя: ");
-                            switch (i)
+                            do
                             {
-                                case 0:
-                                    do
-                                    {
-                                        userName_1 = Console.ReadLine();
-                                        if (userName_1 == "")
-                                        {
-                                            Console.WriteLine("Повторите ввод");
-                                        }
-                                    } while (userName_1 == "");
-                                    break;
+                                userName[i] = Console.ReadLine();
+                                if (userName[i] == "")
+                                {
+                                    Console.WriteLine("Повторите ввод");
+                                }
+                            } while (userName[i] == "");
 
-                                case 1:
-                                    do
-                                    {
-                                        userName_2 = Console.ReadLine();
-                                        if (userName_2 == "")
-                                        {
-                                            Console.WriteLine("Повторите ввод");
-                                        }
-                                    } while (userName_2 == "");
-                                    break;
-
-                                case 2:
-                                    do
-                                    {
-                                        userName_3 = Console.ReadLine();
-                                        if (userName_3 == "")
-                                        {
-                                            Console.WriteLine("Повторите ввод");
-                                        }
-                                    } while (userName_3 == "");
-                                    break;
-
-                                case 3:
-                                    do
-                                    {
-                                        userName_4 = Console.ReadLine();
-                                        if (userName_4 == "")
-                                        {
-                                            Console.WriteLine("Повторите ввод");
-                                        }
-                                    } while (userName_4 == "");
-                                    break;
-
-                                default:
-                                    break;
-                            }
                         }
 
 
+                        player = randomNumber.Next(0,4);
+                        while (gameNumber != 0)
+                        {
+                            player++;
+                            if (player > numberPlayer) player = 1;
+                            Console.Clear();
+                            Console.WriteLine($"gameNumber= {gameNumber}");
 
+                            Console.WriteLine($"Ход игрока {userName[player-1]}");
+                            
+                            var userTry = int.Parse(Console.ReadLine());
+                            if (userTry < 1 || userTry > 4)
+                            {
+                                userTry = 0;
+                                Console.WriteLine("Вы ввели не верное число, вы пропускаете это ход");
+                                Console.ReadKey();
+                            }
 
+                            gameNumber -= userTry;
+                            if (gameNumber < 0)
+                            {
+                                player = 0;
+                                break;
 
+                            }
 
+                        }
 
-
-
-
+                        Console.Clear();
+                        if (player == 0)
+                        {
+                            Console.WriteLine(" НИКТО, УРА, ДРУЖЕСКАЯ НИЧЬЯ");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Победитель: {userName[player-1]} ");
+                        }
                         
-                        
-                        
-                        
-                        
-
-
-                        
-
-                        //Console.Clear();
-                        //Console.WriteLine($"Итак, приветствую {userName_1} и {userName_2}");
-                        //var firstPlayer = randomNumber.Next(1, 3);
-                        //string firstPlayerName, secondPlayerName;
-                        //if (firstPlayer == 1)
-                        //{
-                        //    firstPlayerName = userName_1;
-                        //    secondPlayerName = userName_2;
-                        //}
-                        //else
-                        //{
-                        //    firstPlayerName = userName_2;
-                        //    secondPlayerName = userName_1;
-                        //}
-
-                        //Console.WriteLine("Первым начинает {0}", firstPlayerName);
-                        //Console.WriteLine("Для продолжения нажмите любую клавишу...");
-                        //Console.ReadKey();
-
-                        //int player = 0;
-                        //while (gameNumber != 0)
-                        //{
-                        //    player++;
-                        //    if (player > 2) player = 1;
-                        //    Console.Clear();
-                        //    Console.WriteLine($"gameNumber= {gameNumber}");
-                        //    if (player == 1)
-                        //    {
-                        //        Console.WriteLine($"{firstPlayerName} выберите число от 1 до 4");
-                        //    }
-                        //    else
-                        //    {
-                        //        Console.WriteLine($"{secondPlayerName} выберите число от 1 до 4");
-                        //    }
-
-                        //    var userTry = int.Parse(Console.ReadLine());
-                        //    if (userTry < 1 || userTry > 4)
-                        //    {
-                        //        userTry = 0;
-                        //        Console.WriteLine("Вы ввели не верное число, вы пропускаете это ход");
-                        //        Console.ReadKey();
-                        //    }
-
-                        //    gameNumber -= userTry;
-                        //    if (gameNumber < 0)
-                        //    {
-                        //        player = 0;
-                        //        break;
-
-                        //    }
-
-                        //}
-
-                        //Console.Clear();
-                        //Console.Write("Победитель: ");
-                        //switch (player)
-                        //{
-                        //    case 1:
-                        //        Console.WriteLine(firstPlayerName);
-                        //        break;
-                        //    case 2:
-                        //        Console.WriteLine(secondPlayerName);
-                        //        break;
-                        //    default:
-                        //        Console.WriteLine(" НИКТО, УРА, ДРУЖЕСКАЯ НИЧЬЯ");
-                        //        break;
-
-                        //}
-
-                        //Console.WriteLine("Для выхода в меню нажмите любую кнопку...");
+                        Console.WriteLine("Для выхода в меню нажмите любую кнопку...");
                         Console.ReadKey();
                         break;
                         #endregion
@@ -344,8 +256,146 @@ namespace HW_3
                     case 3:
 
                         #region Третий вариант игры
-                        Console.WriteLine("3");
+                        // ввод данных пользователей 
+                        Console.Clear();
+                        Console.WriteLine("Для начала игры нужно представится, чтобы продолжить - нажмите любую клавишу. . .");
                         Console.ReadKey();
+                        Console.Clear();
+                        Console.Write("Игрок №1 введите свое имя: ");
+                        // цикл обеспечивающий ввод имени пользователя
+                        do
+                        {
+                            userName_1 = Console.ReadLine();
+                            if (userName_1 == "")
+                            {
+                                Console.WriteLine("Повторите ввод");
+                            }
+                        } while (userName_1 == "");
+
+                        Console.Clear();
+                        Console.WriteLine("Введите дипазон чисел для случайного определения числа");
+                        Console.WriteLine("Введите МИНимальный предел");
+                        do
+                        {
+                            correctParse = int.TryParse(Console.ReadLine(), out minNumber);
+                            if (!correctParse) Console.WriteLine("Не верный ввод, повторите");
+                        }
+                        while (!(correctParse));
+
+                        Console.WriteLine("Введите МАКСимальный предел");
+                        do
+                        {
+                            correctParse = int.TryParse(Console.ReadLine(), out maxNumber);
+                            if (!correctParse) Console.WriteLine("Не верный ввод, повторите");
+                        }
+                        while (!(correctParse));
+
+                        gameNumber = randomNumber.Next(minNumber, maxNumber + 1);
+
+                        // Случайное определение, кто первый ходит, (в задании не указано, так сказать бонус)
+                        Console.Clear();
+                        Console.WriteLine($"Итак, приветствую {userName_1}");
+                        firstPlayer = randomNumber.Next(1, 3);
+                        
+                        if (firstPlayer == 1)
+                        {
+                            firstPlayerName = userName_1;
+                            secondPlayerName = "Компьютер";
+                        }
+                        else
+                        {
+                            firstPlayerName = "Компьютер";
+                            secondPlayerName = userName_1;
+                        }
+
+                        Console.WriteLine("Первым начинает {0}", firstPlayerName);
+                        Console.WriteLine("Для продолжения нажмите любую клавишу...");
+                        Console.ReadKey();
+
+                        // цикл игры
+                        player = 0;
+                        while (gameNumber != 0)
+                        {
+                            player++;
+                            int userTry=0;
+                            if (player > 2) player = 1;
+                            Console.Clear();
+                            Console.WriteLine($"gameNumber= {gameNumber}");
+
+
+                            if (player == 1)
+                            {
+                                if (firstPlayer == 1)
+                                {
+                                    Console.WriteLine($"{firstPlayerName} выберите число от 1 до 4");
+                                    userTry = int.Parse(Console.ReadLine());
+                                    if (userTry < 1 || userTry > 4)
+                                    {
+                                        userTry = 0;
+                                        Console.WriteLine("Вы ввели не верное число, вы пропускаете это ход");
+                                        Console.ReadKey();
+                                    }
+                                }
+                                else
+                                {
+                                    userTry = randomNumber.Next(1, 5);
+                                    Console.WriteLine("Ход компьютера - {0}\n Нажмите любую кнопку...",userTry);
+                                    Console.ReadKey();
+                                }
+                            }
+                            else
+                            {
+                                if (firstPlayer != 1)
+                                {
+                                    Console.WriteLine($"{secondPlayerName} выберите число от 1 до 4");
+                                    userTry = int.Parse(Console.ReadLine());
+                                    if (userTry < 1 || userTry > 4)
+                                    {
+                                        userTry = 0;
+                                        Console.WriteLine("Вы ввели не верное число, вы пропускаете это ход");
+                                        Console.ReadKey();
+                                    }
+                                }
+                                else
+                                {
+                                    userTry = randomNumber.Next(1, 5);
+                                    Console.WriteLine("Ход компьютера - {0}\n Нажмите любую кнопку...", userTry);
+                                    Console.ReadKey();
+                                }
+                            }
+
+                            
+
+                            gameNumber -= userTry;
+                            if (gameNumber < 0)
+                            {
+                                player = 0;
+                                break;
+
+                            }
+
+                        }
+
+                        //определение победителя
+                        Console.Clear();
+                        Console.Write("Победитель: ");
+                        switch (player)
+                        {
+                            case 1:
+                                Console.WriteLine(firstPlayerName);
+                                break;
+                            case 2:
+                                Console.WriteLine(secondPlayerName);
+                                break;
+                            default:
+                                Console.WriteLine(" НИКТО, УРА, ДРУЖЕСКАЯ НИЧЬЯ");
+                                break;
+
+                        }
+
+                        Console.WriteLine("Для выхода в меню нажмите любую кнопку...");
+                        Console.ReadKey();
+
                         break;
                         #endregion
                     
