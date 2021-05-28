@@ -47,7 +47,8 @@ namespace HW_3
                     case 1:
 
                         #region Первый вариант игры
-                        int gameNumber = randomNumber.Next(12, 121);            //определение случайной переменной randomNumber
+
+                        var gameNumber = randomNumber.Next(12, 121);            //определение случайной переменной randomNumber
                         // ввод данных пользователей 
                         Console.Clear();
                         Console.WriteLine("Для начала игры нужно представится, чтобы продолжить - нажмите любую клавишу. . .");
@@ -64,7 +65,7 @@ namespace HW_3
                             }
                         } while (userName_1=="");
 
-                        // цикл обеспечивающий ввод имени пользователя
+                        // цикл обеспечивающий ввод имени пользователя 2
                         Console.Clear();
                         Console.Write("Игрок №2 введите свое имя: ");
                         do
@@ -97,7 +98,7 @@ namespace HW_3
                         Console.ReadKey();
 
                         // цикл игры
-                        int player = 0;
+                        var player = 0;
                         while (gameNumber!=0)
                         {
                             player++;
@@ -112,6 +113,10 @@ namespace HW_3
                             {
                                 Console.WriteLine($"{secondPlayerName} выберите число от 1 до 4");
                             }
+                            //можно применить тернарное выражение строчек меньше, но хуже читается код
+                            //Console.WriteLine(player == 1
+                            //    ? $"{firstPlayerName} выберите число от 1 до 4"
+                            //    : $"{secondPlayerName} выберите число от 1 до 4");
 
                             var userTry = int.Parse(Console.ReadLine());
                             if (userTry < 1 || userTry > 4)
@@ -158,7 +163,7 @@ namespace HW_3
 
                         #region Второй вариант игры
 
-                        int numberPlayer, minNumber, maxNumber;
+                        int numberPlayer, minNumber, maxNumber; // обявление переменных
                         Console.Clear();
                         Console.WriteLine("Выберите количество играков от 2х до 4х");
                         // цикл меню, пока ввод не корректен крутимся в меню
@@ -168,7 +173,7 @@ namespace HW_3
                             if (numberPlayer <= 1 || numberPlayer >= 5) Console.WriteLine("Не верный ввод, повторите");
                         }
                         while (!(correctParse && (numberPlayer > 1 && numberPlayer < 5)));
-                        string[] userName = new string[numberPlayer];
+                        
                         Console.Clear();
                         Console.WriteLine("Введите дипазон чисел для случайного определения числа");
                         Console.WriteLine("Введите МИНимальный предел");
@@ -193,8 +198,13 @@ namespace HW_3
                         Console.WriteLine("Для начала игры нужно представится, чтобы продолжить - нажмите любую клавишу. . .");
                         Console.ReadKey();
                         Console.Clear();
+                        /*
+                         * для разнообразности решил попробовать массив для хранения имен пользователей
+                         * применение массива значительно сократило листинг
+                         */
+                        var userName = new string[numberPlayer]; // объявление массива
 
-                        for (int i = 0; i < numberPlayer; i++)
+                        for (var i = 0; i < numberPlayer; i++)
                         {
                             Console.Clear();
                             Console.Write($"Игрок №{i + 1} введите свое имя: ");
@@ -209,7 +219,7 @@ namespace HW_3
 
                         }
 
-
+                        // определение кто ходит первый
                         player = randomNumber.Next(0,4);
                         while (gameNumber != 0)
                         {
@@ -233,21 +243,15 @@ namespace HW_3
                             {
                                 player = 0;
                                 break;
-
                             }
 
                         }
 
                         Console.Clear();
-                        if (player == 0)
-                        {
-                            Console.WriteLine(" НИКТО, УРА, ДРУЖЕСКАЯ НИЧЬЯ");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Победитель: {userName[player-1]} ");
-                        }
-                        
+                        Console.WriteLine(player == 0
+                            ? " НИКТО, УРА, ДРУЖЕСКАЯ НИЧЬЯ"
+                            : $"Победитель: {userName[player - 1]} ");
+
                         Console.WriteLine("Для выхода в меню нажмите любую кнопку...");
                         Console.ReadKey();
                         break;
@@ -317,7 +321,7 @@ namespace HW_3
                         while (gameNumber != 0)
                         {
                             player++;
-                            int userTry=0;
+                            var userTry = 0;
                             if (player > 2) player = 1;
                             Console.Clear();
                             Console.WriteLine($"gameNumber= {gameNumber}");
@@ -416,11 +420,9 @@ namespace HW_3
                             Console.WriteLine("/*****************************************/");
                             Console.WriteLine("Введите пункт меню. . .");
                             correctParse = int.TryParse(Console.ReadLine(), out ruleNumber); // ввод и проверка значения с клавиатуры
-                            if (!(ruleNumber > 0 && ruleNumber < 5))
-                            {
-                                Console.WriteLine("Не корректный ввод, попробуйте еще раз...");
-                                Console.ReadKey();
-                            }
+                            if (ruleNumber > 0 && ruleNumber < 5) continue;
+                            Console.WriteLine("Не корректный ввод, попробуйте еще раз...");
+                            Console.ReadKey();
                         }
                         while (!(correctParse && (ruleNumber > 0 && ruleNumber < 5)));
 
