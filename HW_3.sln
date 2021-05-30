@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW_3", "HW_3.csproj", "{F9F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v01", "v01", "{A995B642-7671-45CB-B688-52F1C2D0FE13}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v02", "v02", "{72B9B1D3-50B0-4D72-BC80-4FEBEAD6A5B3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW3_02", "..\HW3_02\HW3_02.csproj", "{DC3B9A32-9CFC-4DC4-A3A9-20F51CE917C9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,17 +17,12 @@ Global
 		{F9FCFB76-51FD-48E1-883C-75A8345C38F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9FCFB76-51FD-48E1-883C-75A8345C38F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9FCFB76-51FD-48E1-883C-75A8345C38F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC3B9A32-9CFC-4DC4-A3A9-20F51CE917C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC3B9A32-9CFC-4DC4-A3A9-20F51CE917C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC3B9A32-9CFC-4DC4-A3A9-20F51CE917C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC3B9A32-9CFC-4DC4-A3A9-20F51CE917C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F9FCFB76-51FD-48E1-883C-75A8345C38F8} = {A995B642-7671-45CB-B688-52F1C2D0FE13}
-		{DC3B9A32-9CFC-4DC4-A3A9-20F51CE917C9} = {72B9B1D3-50B0-4D72-BC80-4FEBEAD6A5B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FDBB701-F356-4F9F-8BD0-E50474D0AA28}
